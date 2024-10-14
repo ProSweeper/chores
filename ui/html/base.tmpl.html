@@ -1,0 +1,21 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ template "title" . }}</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header><a href="/">Chores</a></header>
+    <main>
+        {{ template "main" . }}
+    </main>
+    <footer> powered by <a href="https://golang.org/">Go</a></footer>
+</body>
+
+</html>
+{{ end }}

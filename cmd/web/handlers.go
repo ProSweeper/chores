@@ -2,12 +2,24 @@ package main
 
 import (
 	"fmt"
+	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello From Chores"))
+	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl.html")
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = ts.Execute(w, nil)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func createChore(w http.ResponseWriter, r *http.Request) {
