@@ -7,7 +7,9 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
+	fileServer := http.FileServer(http.Dir("./ui/static/"))
 
+	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 	mux.HandleFunc("GET /{$}", home)
 	mux.HandleFunc("GET /chore/create", createChore)
 	mux.HandleFunc("GET /chore/view/{choreId}", viewChore)
